@@ -2,7 +2,28 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Helpet" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary color. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- Primary variant color. -->
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <!-- Secondary color. -->
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <!-- Secondary variant color. -->
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <!-- Background color. -->
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <!-- Surface color. -->
+        <item name="colorSurface">@color/colorSurface</item>
+        <!-- Error color. -->
+        <item name="colorError">@color/colorError</item>
+        <!-- On primary color. -->
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <!-- On secondary color. -->
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <!-- On background color. -->
+        <item name="colorOnBackground">@color/colorOnBackground</item>
+        <!-- On surface color. -->
+        <item name="colorOnSurface">@color/colorOnSurface</item>
     </style>
 
     <style name="Theme.Helpet" parent="Base.Theme.Helpet" />
