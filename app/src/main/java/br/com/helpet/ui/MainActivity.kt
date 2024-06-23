@@ -1,21 +1,38 @@
 package br.com.helpet.ui
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import br.com.helpet.R
+import br.com.helpet.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    private val splashScreenScope = CoroutineScope(Dispatchers.Main)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(R.layout.layout_splash)
+
+        // Aplicar a animação de fade-in na splash screen
+        val splashScreenView = findViewById<FrameLayout>(R.id.splash_container)
+        val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        splashScreenView.startAnimation(fadeIn)
+
+        splashScreenScope.launch {
+            // Simulando uma operação de carregamento de dados com delay
+            delay(5000) // 5 segundos de atraso para simular o carregamento
+            setContentView(binding.root)
         }
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        splashScreenScope.cancel() // Cancele a coroutine quando a atividade for destruída
     }
 }

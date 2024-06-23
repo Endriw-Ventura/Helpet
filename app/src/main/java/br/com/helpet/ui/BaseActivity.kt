@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import java.lang.reflect.ParameterizedType
 
 
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
@@ -14,7 +15,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = initializeBinding()
+        _binding = inflateBinding()
         setContentView(binding.root)
     }
 
@@ -23,9 +24,10 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         _binding = null
     }
 
-    protected abstract fun getViewBinding(inflater: LayoutInflater): VB
-
-    private fun initializeBinding(): VB {
-        return getViewBinding(layoutInflater)
+    @Suppress("UNCHECKED_CAST")
+    private fun inflateBinding(): VB {
+        val type = (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<VB>
+        val method = type.getMethod("inflate", LayoutInflater::class.java)
+        return method.invoke(null, layoutInflater) as VB
     }
 }

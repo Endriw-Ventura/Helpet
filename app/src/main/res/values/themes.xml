@@ -27,4 +27,8 @@
     </style>
 
     <style name="Theme.Helpet" parent="Base.Theme.Helpet" />
+
+    <style name="Theme.Helpet.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 </resources>
