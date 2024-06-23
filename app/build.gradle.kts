@@ -7,6 +7,9 @@ android {
     namespace = "br.com.helpet"
     compileSdk = 34
 
+    buildFeatures {
+        buildConfig = true
+    }
     defaultConfig {
         applicationId = "br.com.helpet"
         minSdk = 25
@@ -15,6 +18,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"https://apihelpet.azurewebsites.net\"")
     }
 
     buildFeatures {

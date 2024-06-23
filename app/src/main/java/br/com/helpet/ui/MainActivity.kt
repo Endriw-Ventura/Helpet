@@ -3,6 +3,7 @@ package br.com.helpet.ui
 import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
+import br.com.helpet.BuildConfig
 import br.com.helpet.R
 import br.com.helpet.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
@@ -20,19 +21,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_splash)
 
-        // Aplicar a animação de fade-in na splash screen
         val splashScreenView = findViewById<FrameLayout>(R.id.splash_container)
         val fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in)
         splashScreenView.startAnimation(fadeIn)
-
         splashScreenScope.launch {
-            // Simulando uma operação de carregamento de dados com delay
-            delay(5000) // 5 segundos de atraso para simular o carregamento
+            delay(5000)
             setContentView(binding.root)
+
         }
     }
     override fun onDestroy() {
         super.onDestroy()
-        splashScreenScope.cancel() // Cancele a coroutine quando a atividade for destruída
+        splashScreenScope.cancel()
     }
 }
